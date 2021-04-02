@@ -32,6 +32,8 @@ namespace DateTaken
 
         private static void ProcessFolder(string path, bool move)
         {
+            var files = 0;
+            var skipped = 0;
             var di = new DirectoryInfo(path);
             if (di.Exists)
             {
@@ -39,7 +41,11 @@ namespace DateTaken
                 {
                     var srcFile = fi.FullName;
                     var date = GetDateTakenFromImage(srcFile);
-                    if (date != DateTime.MaxValue)
+                    if (date == DateTime.MaxValue)
+                    {
+                        skipped++;
+                    }
+                    else
                     {
                         var dstPath = String.Format(@"{0}\{1}\{2:00}\{3:00}", path, date.Year, date.Month, date.Day);
                         Directory.CreateDirectory(dstPath);
@@ -53,22 +59,25 @@ namespace DateTaken
                             if (move)
                             {
                                 Console.WriteLine(String.Format("Moving: {0}", dstFile));
-                                File.Move(srcFile, dstFile);
+                                // File.Move(srcFile, dstFile);
                             }
                             else
                             {
                                 Console.WriteLine(String.Format("Copying: {0}", dstFile));
-                                File.Copy(srcFile, dstFile);
+                                // File.Copy(srcFile, dstFile);
                             }
+                            files++;
                         }
                     }
                 }
             }
+            Console.WriteLine($"Files copied/moved: {files}");
+            Console.WriteLine($"Files skipped: {skipped}");
         }
 
         public static void Main(string[] args)
         {
-            ProcessFolder(@"C:\IMAGES\101APPLE\", false);
+            ProcessFolder(@"D:\00-NO_SYNC\FOTOS\2020-2021\106APPLE\", false);
             Console.WriteLine("Done!");
             Console.ReadKey();
         }
