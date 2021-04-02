@@ -47,23 +47,23 @@ namespace DateTaken
                     }
                     else
                     {
-                        var dstPath = String.Format(@"{0}\{1}\{2:00}\{3:00}", path, date.Year, date.Month, date.Day);
+                        var dstPath = $"{path}\\{date.Year}\\{date.Month:00}\\{date.Day:00}";
                         Directory.CreateDirectory(dstPath);
-                        var dstFile = String.Format(@"{0}\{1}", dstPath, fi.Name);
+                        var dstFile = $"{dstPath}\\{fi.Name}";
                         if (File.Exists(dstFile))
                         {
-                            Console.WriteLine(String.Format("File Exists: {0}!", dstFile));
+                            Console.WriteLine($"File Exists: {dstFile}!");
                         }
                         else
                         {
                             if (move)
                             {
-                                Console.WriteLine(String.Format("Moving: {0}", dstFile));
+                                Console.WriteLine($"Moving: {dstFile}");
                                 // File.Move(srcFile, dstFile);
                             }
                             else
                             {
-                                Console.WriteLine(String.Format("Copying: {0}", dstFile));
+                                Console.WriteLine($"Copying: {dstFile}");
                                 // File.Copy(srcFile, dstFile);
                             }
                             files++;
