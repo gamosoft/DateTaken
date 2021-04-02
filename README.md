@@ -11,4 +11,4 @@ The hierarchy will be created under the source folder. If you start under c:\som
 
 The code is very silly, but if you have any questions please let me know. :-)
 
-Hope you like it!
+Hope you find it useful! ;-)
